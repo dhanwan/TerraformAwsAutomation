@@ -23,6 +23,11 @@ resource "aws_iam_role" "tf_cicd_role" {
 }
 
 data "aws_iam_policy_document" "tf_iam_policy" {
+
+    statement {
+      sid = ""
+      actions = [""]
+    }
     statement {
       sid = ""
       actions = [ "logs:*","s3:*","codebuild:*", "iam:*" ]
@@ -34,7 +39,7 @@ data "aws_iam_policy_document" "tf_iam_policy" {
 resource "aws_iam_policy" "tf_iam_policy" {
     name = "tf_CodePiplineCiCd"
     path = "/"
-    description = "Allow s2 codebuild and cloudwatch"
+    description = "Allow s3 codebuild and cloudwatch"
     policy = data.aws_iam_policy_document.tf_iam_policy.json
   
 }
