@@ -1,21 +1,17 @@
-locals {
-  name = "tf_test"
-
-}
 
 module "tf_vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "3.18.1"
 
   name = "${local.name}-vpc"
-  cidr = "20.0.0.0/16"
+  cidr = var.vpc_cidr
 
-  azs = ["ap-south-1a", "ap-south-1b", "ap-south-1c"]
-  private_subnets     = ["20.0.1.0/24", "20.0.2.0/24", "20.0.3.0/24"]
-  public_subnets      = ["20.0.11.0/24", "20.0.12.0/24", "20.0.13.0/24"]
+  azs = var.availability_zone
+  private_subnets     = var.private_subnets_cidr
+  public_subnets      = var.public_subnets_cidr
 
   # Database 
-  database_subnets    = ["20.0.21.0/24", "20.0.22.0/24", "20.0.23.0/24"]
+  database_subnets    = var.db_subnets
   
   #database subnet group
   create_database_subnet_group =  true
@@ -28,21 +24,18 @@ module "tf_vpc" {
   enable_nat_gateway = false
 
   public_subnet_tags = {
-    "Type" = "${local.name}-vpc-public"
+    "Type" = "${local.name}-subnet-public"
   } 
 
   private_subnet_tags = {
-    "Type" = "${local.name}-vpc-private"
+    "Type" = "${local.name}-subnet-private"
   }
 
   database_subnet_tags = {
-    "Type" = "${local.name}-database-subnet"
+    "Type" = "${local.name}-db-subnet"
   }
 
-  tags = {
-    "type" = local.name
-    "CreatedBy" = "Dhanwan Prajapati"
-  }
+  tags = local.common_tags
 
 
 }
