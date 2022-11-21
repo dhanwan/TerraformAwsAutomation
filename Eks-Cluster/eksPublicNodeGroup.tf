@@ -7,15 +7,15 @@ resource "aws_eks_node_group" "k8s-ng-public" {
   ami_type = "AL2_x86_64"
   capacity_type = "ON_DEMAND"
   disk_size = 20
-  instance_types = [ "t3.medium" ]
+  instance_types = [ "t2.medium" ]
 
   remote_access {
     ec2_ssh_key = var.aws_key
   }
   scaling_config {
-    desired_size = 1
-    max_size     = 2
-    min_size     = 1
+    desired_size = 2
+    max_size     = 3
+    min_size     = 2
   }
 
   update_config {

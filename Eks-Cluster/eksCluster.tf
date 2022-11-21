@@ -21,7 +21,6 @@ resource "aws_eks_cluster" "k8s" {
   depends_on = [
     aws_iam_role_policy_attachment.k8s-AmazonEKSClusterPolicy,
     aws_iam_role_policy_attachment.k8s-AmazonEKSVPCResourceController,
-    module.vpc_dev
   ]
   
 }
