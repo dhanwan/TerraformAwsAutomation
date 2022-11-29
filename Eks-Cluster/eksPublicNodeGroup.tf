@@ -13,9 +13,9 @@ resource "aws_eks_node_group" "k8s-ng-public" {
     ec2_ssh_key = var.aws_key
   }
   scaling_config {
-    desired_size = 2
-    max_size     = 3
-    min_size     = 2
+    desired_size = 1
+    max_size     = 2
+    min_size     = 1
   }
 
   update_config {

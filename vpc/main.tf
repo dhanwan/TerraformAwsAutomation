@@ -21,7 +21,8 @@ module "tf_vpc" {
   enable_dns_support   = true
 
   # For Outbound connection 
-  enable_nat_gateway = false
+  enable_nat_gateway = true
+  single_nat_gateway = true
 
   public_subnet_tags = {
     "Type" = "${local.name}-subnet-public"
